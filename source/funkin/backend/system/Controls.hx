@@ -374,4 +374,20 @@ class Controls extends FlxActionSet
 	public inline function getPressed(name:String) {
 		return ControlsUtil.getPressed(this, name);
 	}
+
+	public inline function checkMobile(buttonName:String, type:String):Bool
+	{
+		var keyMap:Array<String> = [buttonName.toLowerCase()]; 
+
+		switch(type)
+		{
+			case "_P":
+				trace('just pressed: $keyMap');
+			case "_R":
+				trace('just released: $keyMap');
+			default:
+				trace('pressed: $keyMap');
+		}
+		return false;
+	}
 }

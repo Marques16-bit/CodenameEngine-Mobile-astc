@@ -341,7 +341,7 @@ class ControlsMacro
 				params: [],
 				expr: _allDevModeOnlyControls.contains(shortName) ?
 					(macro return Options.devMode && $i{internalName}.check()) :
-					(macro return $i{internalName}.check()),
+					(macro return $i{internalName}.check() || checkMobile($v{shortName}, $v{type})),
 				args: []
 			}),
 			pos: field.pos,

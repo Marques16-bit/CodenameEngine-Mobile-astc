@@ -89,12 +89,14 @@ class NativeApplication
 		Sensor.registerSensor(SensorType.ACCELEROMETER, 0);
 		#end
 
+		/*
 		#if android
 		var setDeviceOrientationListener = JNI.createStaticMethod("org/haxe/lime/GameActivity", "setDeviceOrientationListener",
 			"(Lorg/haxe/lime/HaxeObject;)V");
 		deviceOrientationListener = new OrientationChangeListener(handleJNIOrientationEvent);
 		setDeviceOrientationListener(deviceOrientationListener);
 		#end
+		*/
 
 		#if (!macro && lime_cffi)
 		handle = NativeCFFI.lime_application_create();
