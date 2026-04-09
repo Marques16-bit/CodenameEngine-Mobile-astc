@@ -50,7 +50,7 @@
 	<!-- _________________________________ Engine Settings _______________________________ -->
 
 	<!-- Comment this out to disable updates !-->
-	<define name="UPDATE_CHECKING" unless="web || hl || neko || debug"/>
+	<define name="UPDATE_CHECKING" unless="web || hl || neko || debug || mobile"/>
 
 	<!-- Comment this out to disable Discord RPC !-->
 	<section if="cpp">
