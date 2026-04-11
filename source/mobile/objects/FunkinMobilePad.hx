@@ -11,8 +11,8 @@ import flixel.util.FlxColor;
 class FunkinMobilePad extends MobilePad {
 	public var curDPadMode(default, null):String = "NONE";
 	public var curActionMode(default, null):String = "NONE";
-	public function new(DPad:String = "NONE", Action:String = "NONE", buttonCreation:Bool = true) {
-		super(DPad, Action, buttonCreation);
+	public function new(DPad:String = "NONE", Action:String = "NONE") {
+		super(DPad, Action);
 		curDPadMode = DPad;
 		curActionMode = Action;
 	}
@@ -56,9 +56,5 @@ class FunkinMobilePad extends MobilePad {
 
 		if (ColorS != -1) button.color = ColorS;
 		return button;
-	}
-
-	public function new(DPad:String, Action:String) {
-		super(DPad, Action);
 	}
 }

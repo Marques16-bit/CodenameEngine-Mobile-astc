@@ -379,7 +379,7 @@ class Controls extends FlxActionSet
 	}
 
 	@:nullSafety(Off)
-	public function checkMobile(buttonName:String, type:String):Bool
+	public function checkMobile(buttonName:String, ?type:String):Bool
 	{
 		if (mobileC) {
 			var keyMap:Array<String> = [buttonName.toUpperCase()];
