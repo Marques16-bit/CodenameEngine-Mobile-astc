@@ -31,7 +31,7 @@ class MobileUtil
 		return AndroidContext.getExternalFilesDir() + '/storagetype.txt';
 
 	// always force path due to haxe
-	public static var currentDirectory:String = "";
+	public static var currentDirectory:String = null;
 	
 	public static function initDirectory():String {
 		var daPath:String = '';
