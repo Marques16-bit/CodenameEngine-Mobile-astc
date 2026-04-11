@@ -377,17 +377,100 @@ class Controls extends FlxActionSet
 
 	public inline function checkMobile(buttonName:String, type:String):Bool
 	{
-		var keyMap:Array<String> = [buttonName.toLowerCase()]; 
+		var keyMap:Array<String> = [buttonName.toUpperCase()];
 
 		switch(type)
 		{
 			case "_P":
-				//trace('just pressed: $keyMap');
+				return mobilePadJustPressed(keyMap) || hitboxJustPressed(keyMap);
 			case "_R":
-				//trace('just released: $keyMap');
+				return mobilePadJustReleased(keyMap) || hitboxJustReleased(keyMap);
 			default:
-				//trace('pressed: $keyMap');
+				return mobilePadPressed(keyMap) || hitboxPressed(keyMap);
 		}
 		return false;
+	}
+	
+	public var isInSubstate:Bool = false; // don't worry about this it becomes true and false on it's own in MusicBeatSubstate
+	public var requestedInstance(get, default):Dynamic; // is set to MusicBeatState or MusicBeatSubstate when the constructor is called
+	public var requestedHitbox(get, default):FunkinHitbox; // for PlayState and EditorPlayState
+	public var mobileC(get, never):Bool;
+
+	private function mobilePadPressed(keys:Array<String>):Bool
+	{
+		if (keys != null && requestedInstance.mobileManager.mobilePad != null)
+			if (requestedInstance.mobileManager.mobilePad.pressed(keys) == true)
+				return true;
+
+		return false;
+	}
+
+	private function mobilePadJustPressed(keys:Array<String>):Bool
+	{
+		if (keys != null && requestedInstance.mobileManager.mobilePad != null)
+			if (requestedInstance.mobileManager.mobilePad.justPressed(keys) == true)
+				return true;
+
+		return false;
+	}
+
+	private function mobilePadJustReleased(keys:Array<String>):Bool
+	{
+		if (keys != null && requestedInstance.mobileManager.mobilePad != null)
+			if (requestedInstance.mobileManager.mobilePad.justReleased(keys) == true)
+				return true;
+
+		return false;
+	}
+
+	private function hitboxPressed(keys:Array<String>):Bool
+	{
+		if (keys != null && requestedHitbox != null)
+			if (requestedHitbox.pressed(keys))
+				return true;
+
+		return false;
+	}
+
+	private function hitboxJustPressed(keys:Array<String>):Bool
+	{
+		if (keys != null && requestedHitbox != null)
+			if (requestedHitbox.justPressed(keys))
+				return true;
+
+		return false;
+	}
+
+	private function hitboxJustReleased(keys:Array<String>):Bool
+	{
+		if (keys != null && requestedHitbox != null)
+			if (requestedHitbox.justReleased(keys))
+				return true;
+
+		return false;
+	}
+
+	@:noCompletion
+	private function get_requestedInstance():Dynamic
+	{
+		if (isInSubstate)
+			return MusicBeatSubstate.instance;
+		else
+			return MusicBeatState.instance;
+	}
+
+	@:noCompletion
+	private function get_requestedHitbox():FunkinHitbox
+	{
+		return requestedInstance.mobileManager.hitbox;
+	}
+
+	@:noCompletion
+	private function get_mobileC():Bool
+	{
+		if (Options.controlsAlpha >= 0.1)
+			return true;
+		else
+			return false;
 	}
 }
