@@ -94,7 +94,7 @@ class MobileUtil
 	public static function getDirectory():String
 	{
 		#if android
-		return AndroidEnvironment.getExternalStorageDirectory() + '/.' + lime.app.Application.current.meta.get('file');
+		return currentDirectory;
 		#elseif ios
 		return LimeSystem.documentsDirectory;
 		#else
