@@ -375,7 +375,7 @@ class Controls extends FlxActionSet
 		return ControlsUtil.getPressed(this, name);
 	}
 
-	public inline function checkMobile(buttonName:String, type:String):Bool
+	public function checkMobile(buttonName:String, type:String):Bool
 	{
 		var keyMap:Array<String> = [buttonName.toUpperCase()];
 
