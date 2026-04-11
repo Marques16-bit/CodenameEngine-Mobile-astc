@@ -191,6 +191,7 @@ class Controls extends FlxActionSet
 	public var gamepadsAdded:Array<Int> = [];
 	public var keyboardScheme:KeyboardScheme = None;
 
+	@:nullSafety(Off)
 	public static var instance:Controls;
 
 	public function new(name, scheme = None)
