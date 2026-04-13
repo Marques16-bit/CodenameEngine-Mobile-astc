@@ -48,7 +48,7 @@
       "buttonIDs": ["NOTE_DOWN"],
       "buttonUniqueID": 1,
       "position": [320, 0],
-      "topPosition": [0, 144],
+      "topPosition": [320, 144],
       "scale": [320, 576],
       "color": "0xFF00FFFF"
     },
@@ -57,7 +57,7 @@
       "buttonIDs": ["NOTE_UP"],
       "buttonUniqueID": 2,
       "position": [640, 0],
-      "topPosition": [0, 144],
+      "topPosition": [640, 144],
       "scale": [320, 576],
       "color": "0xFF12FA05"
     },
@@ -66,7 +66,7 @@
       "buttonIDs": ["NOTE_RIGHT"],
       "buttonUniqueID": 3,
       "position": [960, 0],
-      "topPosition": [0, 144],
+      "topPosition": [960, 144],
       "scale": [320, 576],
       "color": "0xFFF9393F"
     },
@@ -92,7 +92,7 @@
       "button": "buttonExtra2",
       "buttonIDs": ["EXTRA_2"],
       "position": [640, 576],
-      "topPosition": [0, 0],
+      "topPosition": [640, 0],
       "scale": [640, 144],
       "color": "0xFFFF00",
       "extraKeyMode": 2
@@ -110,7 +110,7 @@
       "button": "buttonExtra2",
       "buttonIDs": ["EXTRA_2"],
       "position": [427, 576],
-      "topPosition": [0, 0],
+      "topPosition": [427, 0],
       "scale": [426, 144],
       "color": "0xFFFF00",
       "extraKeyMode": 3
@@ -119,7 +119,7 @@
       "button": "buttonExtra3",
       "buttonIDs": ["EXTRA_3"],
       "position": [853, 576],
-      "topPosition": [0, 0],
+      "topPosition": [853, 0],
       "scale": [427, 144],
       "color": "0x0000FF",
       "extraKeyMode": 3
@@ -137,7 +137,7 @@
       "button": "buttonExtra2",
       "buttonIDs": ["EXTRA_2"],
       "position": [320, 576],
-      "topPosition": [0, 0],
+      "topPosition": [320, 0],
       "scale": [320, 144],
       "color": "0xFFFF00",
       "extraKeyMode": 4
@@ -146,7 +146,7 @@
       "button": "buttonExtra3",
       "buttonIDs": ["EXTRA_3"],
       "position": [640, 576],
-      "topPosition": [0, 0],
+      "topPosition": [640, 0],
       "scale": [320, 144],
       "color": "0x0000FF",
       "extraKeyMode": 4
@@ -155,7 +155,7 @@
       "button": "buttonExtra4",
       "buttonIDs": ["EXTRA_4"],
       "position": [960, 576],
-      "topPosition": [0, 0],
+      "topPosition": [960, 0],
       "scale": [320, 144],
       "color": "0x00FF00",
       "extraKeyMode": 4
