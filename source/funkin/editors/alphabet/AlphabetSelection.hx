@@ -30,6 +30,12 @@ class AlphabetSelectionScreen extends EditorTreeMenuScreen {
 
 		for (typeface in modsList)
 			add(new AlphabetIconOption(typeface, getID('acceptTypeface'), typeface, () -> FlxG.switchState(new AlphabetEditor(typeface))));
+		
+		final state = MusicBeatState.instance;
+		if (state != null) {
+			state.addMobilePad("UP_DOWN", "A_B");
+			state.addMobilePadCamera();
+		}
 	}
 }
 

@@ -123,7 +123,7 @@ class MainMenuState extends MusicBeatState
 				}
 				*/
 			}
-			if (!Options.devMode && controls.DEV_ACCESS) {
+			if (!Options.devMode && (FlxG.keys.justPressed.SEVEN || mobilePadJustPressed("DEV_ACCESS"))) {
 				FlxG.sound.play(Paths.sound(Flags.DEFAULT_EDITOR_DELETE_SOUND));
 				if (devModeCount++ == 2) {
 					FlxTween.tween(devModeWarning, {alpha: 1}, 0.4);

@@ -2,6 +2,7 @@ package funkin.editors.ui;
 
 import flixel.input.keyboard.FlxKey;
 import flixel.util.FlxColor;
+import funkin.options.PlayerSettings;
 
 class UIContextMenu extends MusicBeatSubstate {
 	public var options:Array<UIContextMenuOption>;
@@ -119,27 +120,36 @@ class UIContextMenu extends MusicBeatSubstate {
 	}
 
 	public override function update(elapsed:Float) {
-		if (__oobDeletion && FlxG.mouse.justPressed && !bg.hoveredByChild && !hoveringAnyChildren())
-			closeWithParents();
+        var isJustPressed:Bool = FlxG.mouse.justPressed;
+        
+        if (PlayerSettings.solo.controls.mobileC) {
+            for (touch in FlxG.touches.list) {
+                if (touch.justPressed) isJustPressed = true;
+            }
+        }
 
-		__oobDeletion = true;
+        if (__oobDeletion && isJustPressed && !bg.hoveredByChild && !hoveringAnyChildren() && !controls.mobileC)
+            closeWithParents();
 
-		super.update(elapsed);
+        __oobDeletion = true;
 
-		if (FlxG.mouse.wheel != 0.0)
-			scroll = FlxMath.bound(scroll + (FlxG.mouse.wheel * -20.0), !flipped ? 0.0 : -Math.max(bg.bHeight - FlxG.height*0.5, 0.0), flipped ? 0.0 : Math.max(bg.bHeight - FlxG.height*0.5, 0.0));
+        super.update(elapsed);
 
-		contextCam.scroll.y = CoolUtil.fpsLerp(contextCam.scroll.y, scroll, 0.5);
-		contextCam.alpha = CoolUtil.fpsLerp(contextCam.alpha, 1, 0.25);
+        if (FlxG.mouse.wheel != 0.0)
+            scroll = FlxMath.bound(scroll + (FlxG.mouse.wheel * -20.0), !flipped ? 0.0 : -Math.max(bg.bHeight - FlxG.height*0.5, 0.0), flipped ? 0.0 : Math.max(bg.bHeight - FlxG.height*0.5, 0.0));
+		if (ScreenUtil.touch.wheel != 0.0)
+            scroll = FlxMath.bound(scroll + (ScreenUtil.touch.wheel * -20.0), !flipped ? 0.0 : -Math.max(bg.bHeight - FlxG.height*0.5, 0.0), flipped ? 0.0 : Math.max(bg.bHeight - FlxG.height*0.5, 0.0));
 
-		if (parentContextMenu != null) {
-			if (hoveringAnyParents() && parentContextMenu.lastHoveredOptionIndex != parentContextMenu.childContextMenuOptionIndex) {
-				closeWithChildren();
-				parentContextMenu.childContextMenuOptionIndex = -1;
-			}
-		}
+        contextCam.scroll.y = CoolUtil.fpsLerp(contextCam.scroll.y, scroll, 0.5);
+        contextCam.alpha = CoolUtil.fpsLerp(contextCam.alpha, 1, 0.25);
 
-	}
+        if (parentContextMenu != null) {
+            if (hoveringAnyParents() && parentContextMenu.lastHoveredOptionIndex != parentContextMenu.childContextMenuOptionIndex) {
+                closeWithChildren();
+                parentContextMenu.childContextMenuOptionIndex = -1;
+            }
+        }
+    }
 
 	public override function destroy() {
 		super.destroy();
@@ -351,20 +361,27 @@ class UIContextMenuOptionSpr extends UISliceSprite {
 	}
 
 	public override function onHovered() {
-		super.onHovered();
+        super.onHovered();
 
-		parent.lastHoveredOptionIndex = parent.contextMenuOptions.indexOf(this);
+        parent.lastHoveredOptionIndex = parent.contextMenuOptions.indexOf(this);
 
-		switch(optionType) {
-			case SUBMENU:
-				parent.openChildContextMenu(this);
-			case SLIDER:
-				
-			default:
-				if (FlxG.mouse.justReleased)
-					parent.select(option);
-		}
-	}
+        var isJustReleased:Bool = FlxG.mouse.justReleased;
+        if (PlayerSettings.solo.controls.mobileC) {
+            for (touch in FlxG.touches.list) {
+                if (touch.justReleased) isJustReleased = true;
+            }
+        }
+
+        switch(optionType) {
+            case SUBMENU:
+                parent.openChildContextMenu(this);
+            case SLIDER:
+                
+            default:
+                if (isJustReleased)
+                    parent.select(option);
+        }
+    }
 
 	public function updateIcon() {
 		var currentIcon = option.icon != null ? option.icon : 0;
@@ -401,10 +418,17 @@ class UIContextMenuOptionIcon extends UISprite {
 	}
 
 	public override function onHovered() {
-		super.onHovered();
+        super.onHovered();
 
-		if (FlxG.mouse.justReleased && option.onIconClick != null) {
-			option.onIconClick(option);
-		}
-	}
+        var isJustReleased:Bool = FlxG.mouse.justReleased;
+        if (PlayerSettings.solo.controls.mobileC) {
+            for (touch in FlxG.touches.list) {
+                if (touch.justReleased) isJustReleased = true;
+            }
+        }
+
+        if (isJustReleased && option.onIconClick != null) {
+            option.onIconClick(option);
+        }
+    }
 }
