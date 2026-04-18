@@ -29,9 +29,12 @@ class UIFileExplorer extends UISliceSprite {
 
 			#if ios
             fileDialog.onOpen.add(res -> {
-                loadBytes(cast(res, Bytes));
+				file = cast(res, Bytes);
+    		    filePath = "yeee";
+ 	 	    	deleteButton.visible = deleteButton.selectable = deleteIcon.visible = !(uploadButton.visible = uploadButton.selectable = false);
+  	    		if (this.onFile != null) this.onFile(filePath, file);
             });
-            fileDialog.open(this.fileType, null, "Load File");
+            fileDialog.open(this.fileType, null, "Load File iOS");
             #else
             fileDialog.onSelect.add(loadFile);
             fileDialog.browse(OPEN, this.fileType);
@@ -76,15 +79,6 @@ class UIFileExplorer extends UISliceSprite {
 
 		if (this.onFile != null) this.onFile(filePath, file);
 	}
-
-	public function loadBytes(loadedBytes:Bytes) {
-        file = loadedBytes;
-        filePath = "ye"; 
-        
-        deleteButton.visible = deleteButton.selectable = deleteIcon.visible = !(uploadButton.visible = uploadButton.selectable = false);
-
-        if (this.onFile != null) this.onFile(filePath, file);
-    }
 
 	public function removeFile() {
 		if (!selectable) return;
