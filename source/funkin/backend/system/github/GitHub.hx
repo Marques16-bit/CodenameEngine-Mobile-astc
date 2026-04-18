@@ -67,12 +67,10 @@ final class GitHub {
 	public static function getOrganization(org:String, ?onError:Exception->Void):GitHubOrganization {
 		#if GITHUB_API
 		try {
-			if (!org.startsWith("ArkoseLabsOfficial")) {
-				var data = Json.parse(HttpUtil.requestText('https://api.github.com/orgs/$org'));
-				if (Reflect.hasField(data, "documentation_url")) throw __parseGitHubException(data);
+			var data = Json.parse(HttpUtil.requestText('https://api.github.com/orgs/$org'));
+			if (Reflect.hasField(data, "documentation_url")) throw __parseGitHubException(data);
 
-				return data;
-			}
+			return data;
 		} catch(e) {
 			if (onError != null)
 				onError(e);
@@ -90,6 +88,9 @@ final class GitHub {
 	 */
 	public static function getOrganizationMembers(org:String, ?onError:Exception->Void):Array<GitHubContributor> {
 		#if GITHUB_API
+		if (org.startsWith("ArkoseLabsOfficial"))
+			return [];
+
 		try {
 			var data = Json.parse(HttpUtil.requestText('https://api.github.com/orgs/$org/members'));
 			if (Reflect.hasField(data, "documentation_url")) throw __parseGitHubException(data);

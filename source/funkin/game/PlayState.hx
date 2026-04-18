@@ -894,9 +894,7 @@ class PlayState extends MusicBeatState
 
 		startingSong = true;
 		addHitbox();
-		addHitboxCamera();
 		addMobilePad('NONE', 'P');
-		addMobilePadCamera();
 		mobileManager.hitbox.visible = false;
 		mobileManager.hitbox.forEachAlive((button) ->
 		{
@@ -939,6 +937,13 @@ class PlayState extends MusicBeatState
 		__updateNote_event = EventManager.get(NoteUpdateEvent);
 
 		gameAndCharsCall("postCreate", null, "gamePostCreate");
+
+		if (mobileManager != null) {
+			if (mobileManager.hitbox != null)
+				addHitboxCamera();
+			if (mobileManager.mobilePad != null)
+				addMobilePadCamera();
+		}
 	}
 
 	/**
