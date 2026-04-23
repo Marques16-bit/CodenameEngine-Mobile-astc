@@ -52,7 +52,7 @@ class Options
 	@:dox(hide) @:doNotSave public static var hitWindow:Float = 250; // DEPRECATED
 	public static var songOffset:Float = 0;
 	public static var framerate:Int = #if mobile 60 #else 120 #end;
-	public static var gpuOnlyBitmaps:Bool = #if (mac || web || mobile) false #else true #end; // causes issues on mac and web
+	public static var gpuOnlyBitmaps:Bool = #if (mac || web) false #else true #end; // causes issues on mac and web
 	public static var language = "en"; // default to english, Flags.DEFAULT_LANGUAGE should not modify this
 	public static var streamedMusic:Bool = false;
 	public static var streamedVocals:Bool = false;
