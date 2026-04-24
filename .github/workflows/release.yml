@@ -8,7 +8,7 @@ jobs:
     uses: ./.github/workflows/android.yml
   build-ios:
     uses: ./.github/workflows/ios.yml
-
+ 
   Releaser:
     needs: [build-android, build-ios]
     runs-on: ubuntu-latest
