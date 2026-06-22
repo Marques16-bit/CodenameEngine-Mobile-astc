@@ -105,6 +105,14 @@ class Paths
 	}
 
 	static public function image(key:String, ?library:String, checkForAtlas:Bool = false, ?ext:String) {
+		#if android
+		// Procura pela textura ASTC comprimida antes de recorrer ao formato padrão
+		var astcPath = getPath('images/$key.astc', library);
+		if (OpenFlAssets.exists(astcPath)) {
+			return astcPath;
+		}
+		#end
+
 		if (ext == null) ext = Flags.IMAGE_EXT;
 		if (checkForAtlas) {
 			var atlasPath = getPath('images/$key/spritemap.$ext', library);
@@ -330,3 +338,4 @@ class ScriptPathInfo {
 		this.library = library;
 	}
 }
+
